@@ -1,0 +1,141 @@
+<?php
+
+/** @var yii\web\View $this */
+/** @var string $content */
+
+use Yii;
+use app\assets\AppAsset;
+use app\widgets\Alert;
+use yii\bootstrap4\Breadcrumbs;
+use yii\helpers\Url;
+use yii\bootstrap4\Html;
+
+AppAsset::register($this);
+?>
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>" class="h-100">
+<head>
+    <meta charset="<?= Yii::$app->charset ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <?php $this->registerCsrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<?=Yii::$app->params['ymap_api_key']?>" type="text/javascript"></script>
+    <?php $this->head() ?>
+</head>
+<body class="d-flex flex-column h-100">
+<?php $this->beginBody() ?>
+
+<header>
+  <nav class="navbar">
+    <div class="navbar-mini">
+        <ul>
+          <li class="f-none">
+              <a href="<?=Url::home()?>">
+                <img src="<?=Url::to('../images/logo-mini.png');?>">
+              </a>
+          </li>
+          <?=app\components\menuWidget::widget(["type" => 0])?>
+            <li class="f-none">
+                <a href="<?=Yii::$app->user->isGuest ? Url::to(['site/login']) : Url::to(['profile/index']) ?>">
+                  <img src="<?=Url::to('../images/icons/profile.svg');?>">
+                </a>
+            </li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="navbar-header d-flex">
+        <a class="logo m-none" href="<?=Url::home()?>">
+          <img src="<?=Url::to('../images/logo.png');?>">
+        </a>
+        <button class="navbar-toggler f-none" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <img src="<?=Url::to('../images/icons/menu.svg');?>">
+        </button>
+        <form id="search-form" method="get" action="<?=Url::to(['search/index']);?>">
+          <div class="block-search">
+              <input class="form-search" type="text" name="q" placeholder="Поиск лекарств" aria-label="Поиск лекарств">
+              <button type="submit" form="search-form" class="btn">Найти</button>
+          </div>
+        </form>
+        <? if(Yii::$app->user->isGuest) : ?>
+          <a href="<?=Url::to(['site/login']);?>" class="btn btn-login m-none">Войти</a>
+        <? else : ?>
+          <a href="<?=Url::to(['profile/index']);?>" class="btn btn-login m-none"><i class="far fa-solid fa-user"></i></a>
+        <? endif?>
+        <a href="mailto:<?=Yii::$app->params['supportEmail']?>" class="btn btn-mail m-none">Напишите нам</a>
+      </div>
+      <div class="navbar-main">
+          <ul>
+              <?=app\components\categoryWidget::widget()?>
+        </ul>
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="nav navbar-nav">
+          <?=app\components\categoryWidget::widget()?>
+      </ul>
+    </div>
+    </div>
+  </nav>
+</header>
+
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        <?= Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
+        <?= Alert::widget() ?>
+        <?= $content ?>
+    </div>
+</main>
+
+<footer class="footer mt-auto text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-6 order-6  order-sm-1 col-sm-4">
+            <h4>Наши приложения</h4>
+              <div class="mobile-app row">
+                <div class="col-12 col-sm-6">
+                  <img src="<?=Url::to('../images/apple.png');?>">
+                </div>
+                <div class="col-12 col-sm-6">
+                  <img src="<?=Url::to('../images/google.png');?>">
+                </div>
+              </div>
+
+            <p>Установите удобные приложения для поиска лекарств в Apple App Store и Google Play.</p>
+            <p class="m-none">© 2006—2022 Единая справочная Аптеки в России.<br/>Все права защищены и охраняются законом.</p>
+        </div>
+        <div class="col-6 order-4 order-sm-2 col-sm-4">
+            <h4 class="m-none">О сервисе</h4>
+            <ul class="two m-none">
+              <?=app\components\menuWidget::widget(["type" => 1])?>
+          </ul>
+          <h4>Пользователям</h4>
+          <ul class="two">
+            <?=app\components\menuWidget::widget(["type" => 3])?>
+        </ul>
+        </div>
+        <div class="col-6 order-3 order-sm-3 col-sm-2">
+            <h4>О сервисе</h4>
+            <ul>
+              <?=app\components\menuWidget::widget(["type" => 2])?>
+          </ul>
+        </div>
+        <div class="col-6 order-5 order-sm-4 col-sm-2">
+            <h4>Профеесионалам</h4>
+            <ul>
+              <?=app\components\menuWidget::widget(["type" => 4])?>
+          </ul>
+        </div>
+      </div>
+    </div>
+</footer>
+
+<?php $this->endBody() ?>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+</body>
+</html>
+<?php $this->endPage() ?>
