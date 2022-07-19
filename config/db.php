@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=apteka',
-    'username' => 'phpmyadmin',
-    'password' => '12480000',
+    'dsn' => 'mysql:host=localhost;dbname=apteka_main',
+    'username' => 'apteka_user',
+    'password' => 'zV9wQ5zD8q',
     'charset' => 'utf8mb4',
 
     // Schema cache options (for production environment)
