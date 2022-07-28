@@ -23,6 +23,7 @@ $this->title = 'Apteka';
             iconCaption: '<?=$company->name?>',
             balloonContentHeader: '<?=$company->name?>',
             balloonContentBody: '<?=$company->address?>',
+            balloonContentFooter: '<a class="btn btn-sm" href="<?=Url::to(['company/index', 'id' =>  $company->id]);?>" >Подробнее</a>'
         }, {
             preset: 'islands#darkGreenIcon'
         }));

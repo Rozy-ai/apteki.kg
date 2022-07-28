@@ -14,27 +14,42 @@ use yii\console\ExitCode;
 
 class AloeController extends BaseController
 {
-    public function actionCategory()
+    public function actionParser() {
+
+      $parser_type = 2;
+
+      if($this->checkProcess($this->route)) {
+        return ExitCode::OK;
+      }
+
+      $settings = $this->getSettings($parser_type);
+      if(!$settings) {
+        return ExitCode::OK;
+      }
+
+      if($settings->category_status == 1) {
+        $this->parserCategory();
+        $settings->category_status = 0;
+        $settings->save();
+      } else if($settings->products_status == 1) {
+        $this->parserProducts();
+        $settings->products_status = 0;
+        $settings->save();
+      } else if($settings->product_status == 1) {
+        $this->parserProduct();
+        $settings->product_status = 0;
+        $settings->save();
+      }
+    }
+
+    protected function parserCategory()
     {
         set_time_limit(0);
-
-        if($this->checkProcess($this->route)) {
-          return ExitCode::OK;
-        }
 
         $parser_type = 2;
         $date = time();
         $url_site = 'http://aloe.kg';
         $ch = curl_init();
-
-        $settings = $this->getSettings($parser_type);
-        if(!$settings) {
-          return ExitCode::OK;
-        }
-
-        if($settings->category_status == 0) {
-          return ExitCode::OK;
-        }
 
     		curl_setopt($ch, CURLOPT_URL, $url_site . "/catalog.html");
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)');
@@ -87,31 +102,15 @@ class AloeController extends BaseController
             $sub_category->save();
           }
         }
-
-        $settings->category_status = 0;
-        $settings->save();
     }
 
-    public function actionProducts()
+    protected function parserProducts()
     {
         set_time_limit(0);
-
-        if($this->checkProcess($this->route)) {
-          return ExitCode::OK;
-        }
 
         $parser_type = 2;
         $url_site = 'http://aloe.kg';
         $date = time();
-
-        $settings = $this->getSettings($parser_type);
-        if(!$settings) {
-          return ExitCode::OK;
-        }
-
-        if($settings->products_status == 0) {
-          return ExitCode::OK;
-        }
 
         $categorys = ParserCategory::find()->where(["type" => $parser_type, "status" => 0])->andWhere(["<>", "refers_id", 0])->all();
         foreach ($categorys as $category) {
@@ -153,31 +152,15 @@ class AloeController extends BaseController
 
           sleep(1);
       }
-
-      $settings->products_status = 0;
-      $settings->save();
     }
 
-    public function actionProduct()
+    protected function parserProduct()
     {
         set_time_limit(0);
-
-        if($this->checkProcess($this->route)) {
-          return ExitCode::OK;
-        }
 
         $company_id = 2;
         $parser_type = 2;
         $date = time();
-
-        $settings = $this->getSettings($parser_type);
-        if(!$settings) {
-          return ExitCode::OK;
-        }
-
-        if($settings->product_status == 0) {
-          return ExitCode::OK;
-        }
 
         $products = ParserProduct::find()->where(["type" => $parser_type, "status" => 0])->all();
 
@@ -248,8 +231,5 @@ class AloeController extends BaseController
 
           sleep(1);
         }
-
-        $settings->product_status = 0;
-        $settings->save();
     }
 }
