@@ -19,7 +19,7 @@ $this->title = 'Авторизация';
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'name')->textInput(['autofocus' => true'placeholder' => $model->getAttributeLabel('name')])->label(false) ?>
+        <?= $form->field($model, 'name')->textInput(['autofocus' => true, 'placeholder' => $model->getAttributeLabel('name')])->label(false) ?>
 
         <?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email')])->label(false) ?>
 

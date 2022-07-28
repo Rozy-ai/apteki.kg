@@ -33,13 +33,13 @@ AppAsset::register($this);
         <ul>
           <li class="f-none">
               <a href="<?=Url::home()?>">
-                <img src="<?=Url::to('../images/logo-mini.png');?>">
+                <img src="<?=Url::to(['../images/logo-mini.png']);?>">
               </a>
           </li>
           <?=app\components\menuWidget::widget(["type" => 0])?>
             <li class="f-none">
                 <a href="<?=Yii::$app->user->isGuest ? Url::to(['site/login']) : Url::to(['profile/index']) ?>">
-                  <img src="<?=Url::to('../images/icons/profile.svg');?>">
+                  <img src="<?=Url::to(['../images/icons/profile.svg']);?>">
                 </a>
             </li>
       </ul>
@@ -47,10 +47,10 @@ AppAsset::register($this);
     <div class="container">
       <div class="navbar-header d-flex">
         <a class="logo m-none" href="<?=Url::home()?>">
-          <img src="<?=Url::to('../images/logo.png');?>">
+          <img src="<?=Url::to(['../images/logo.png']);?>">
         </a>
         <button class="navbar-toggler f-none" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <img src="<?=Url::to('../images/icons/menu.svg');?>">
+          <img src="<?=Url::to(['../images/icons/menu.svg']);?>">
         </button>
         <form id="search-form" method="get" action="<?=Url::to(['search/index']);?>">
           <div class="block-search">
@@ -98,10 +98,10 @@ AppAsset::register($this);
             <h4>Наши приложения</h4>
               <div class="mobile-app row">
                 <div class="col-12 col-sm-6">
-                  <img src="<?=Url::to('../images/apple.png');?>">
+                  <img src="<?=Url::to(['../images/apple.png']);?>">
                 </div>
                 <div class="col-12 col-sm-6">
-                  <img src="<?=Url::to('../images/google.png');?>">
+                  <img src="<?=Url::to(['../images/google.png']);?>">
                 </div>
               </div>
 
@@ -125,7 +125,7 @@ AppAsset::register($this);
           </ul>
         </div>
         <div class="col-6 order-5 order-sm-4 col-sm-2">
-            <h4>Профеесионалам</h4>
+            <h4>Профессионалам</h4>
             <ul>
               <?=app\components\menuWidget::widget(["type" => 4])?>
           </ul>

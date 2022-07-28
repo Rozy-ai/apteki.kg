@@ -43,6 +43,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             [['email', 'password', 'name'], 'required'],
 						[['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            ['email', 'unique'],
             [['email', 'password', 'token'], 'string', 'max' => 255],
         ];
     }

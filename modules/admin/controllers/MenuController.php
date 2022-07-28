@@ -19,7 +19,7 @@ class MenuController extends Controller
      */
     public function behaviors()
     {
-        return [			
+        return [
 			'access' => [
                 'class' => \yii\filters\AccessControl::className(),
                 'rules' => [
@@ -75,7 +75,7 @@ class MenuController extends Controller
     public function actionCreate($type)
     {
         $model = new Menu(["type" => $type, "priority" => 10]);
-		
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -114,9 +114,10 @@ class MenuController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+      $model = $this->findModel($id);
+      $model->delete();
 
-        return $this->redirect(['index']);
+      return $this->redirect(['index', 'type' => $model->type]);
     }
 
     /**
@@ -134,5 +135,5 @@ class MenuController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-	
+
 }

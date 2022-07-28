@@ -242,9 +242,13 @@ class AtleticshopController extends BaseController
               $array = explode(".", $url);
               $expansion = $array[count($array) - 1];
               $path = "./web/uploads/" . time() . $expansion;
-              file_put_contents($path , fopen($url, 'r'));
-              $item->attachImage($path);
-              unlink($path);
+              try {
+                file_put_contents($path , fopen($url, 'r'));
+                $item->attachImage($path);
+                unlink($path);
+              } catch (\Exception $e) {
+                  $this->consoleLog($parser_type, $e->getMessage());
+              }
               sleep(1);
             }
 

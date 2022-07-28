@@ -27,11 +27,13 @@ $this->title = 'Apteka';
 
 
   <div class="search-products">
-    <ul>
+    <div class="row">
       <? foreach ($products as $product)  : ?>
-        <li><a href="<?=Url::to(['search/product', 'id' => $product->id]);?>"><?=$product->name?></a></li>
+        <div class="col-6 col-sm-3">
+          <a href="<?=Url::to(['search/product', 'id' => $product->id]);?>"><?=$product->name?></a>
+        </div>
       <? endforeach ?>
-    </ul>
+    </div>
   </div>
 
   <br/>

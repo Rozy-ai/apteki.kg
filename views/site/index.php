@@ -30,22 +30,22 @@ foreach ($banners as $banner) {
         ]);?>
       <? endif ?>
 
-      <!--<br/><br/>
+      <br/><br/>
       <h2>Популярное</h2>
       <div class="category-block row">
         <div class="col-6 col-sm-3">
-          <img src="<?//=Url::to('../images/category/1.png');?>">
+          <img src="<?=Url::to('../images/category/1.png');?>">
         </div>
         <div class="col-6 col-sm-3">
-          <img src="<?//=Url::to('../images/category/2.png');?>">
+          <img src="<?=Url::to('../images/category/2.png');?>">
         </div>
         <div class="col-6 col-sm-3">
-          <img src="<?//=Url::to('../images/category/3.png');?>">
+          <img src="<?=Url::to('../images/category/3.png');?>">
         </div>
         <div class="col-6 col-sm-3">
-          <img src="<?//=Url::to('../images/category/4.png');?>">
+          <img src="<?=Url::to('../images/category/4.png');?>">
         </div>
-      </div>-->
+      </div>
 
       <br/><br/>
       <h2>Каталог</h2>
@@ -67,7 +67,7 @@ foreach ($banners as $banner) {
                 <span class="number">Артикул: <?=$product->number?></span>
                 <div class="d-flex">
                   <div class="price">От <?=$product->price?> c.</div>
-                  <div class="count"><?=count($product->availability)?> предложений</div>
+                  <div class="count"><?=count($product->availability)?> пред.</div>
                 </div>
               </a>
               <a href="<?=Url::to(['product/index', 'id' => $product->id]);?>" class="btn">Цена на карте</a>
