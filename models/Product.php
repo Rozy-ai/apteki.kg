@@ -46,8 +46,9 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['active', 'price', 'number', 'category_id', 'producer_id', 'substance_id', 'country_id', 'parser_product_id'], 'integer'],
-            [['name', 'price', 'category_id'], 'required'],
+            [['active', 'availability_count', 'number', 'category_id', 'producer_id', 'substance_id', 'country_id', 'parser_product_id'], 'integer'],
+            [['name', 'category_id'], 'required'],
+            ['price', 'number'],
             ["description", "string"],
             [['name', 'hash'], 'string', 'max' => 255],
             [['rating'], 'number'],
@@ -79,6 +80,11 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasMany(ProductAvailability::className(), ['product_id' => 'id']);
     }
 
+    public function getAvailabilityOne()
+    {
+        return $this->hasOne(ProductAvailability::className(), ['product_id' => 'id']);
+    }
+
     public function getSubstance()
     {
         return $this->hasOne(Substance::className(), ['id' => 'substance_id']);
@@ -99,12 +105,14 @@ class Product extends \yii\db\ActiveRecord
             'active' => 'Активность',
             'name' => 'Название',
             'price' => 'Цена',
+            'availability_count' => 'Предложения',
             'number' => 'Артикул',
             'rating' => 'Рейтинг',
             'category_id' => 'Категория',
             'producer_id' => 'Производитель',
             'substance_id' => 'Действующее вещество',
             'country_id' => 'Страна',
+            'description' => 'Описание',
             'parser_product_id' => "Парсер"
         ];
     }

@@ -5,6 +5,8 @@ use yii\bootstrap4\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\Url;
 use kartik\file\FileInput;
+use mihaildev\ckeditor\CKEditor;
+use mihaildev\elfinder\ElFinder;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -19,7 +21,7 @@ $product_id = isset($model->id) ? $model->id : 0;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'hash')->hiddenInput()->label(false) ?>
-    
+
     <?= $form->field($model, 'active')->checkbox() ?>
 
     <label>Фото</label>
@@ -76,6 +78,10 @@ $product_id = isset($model->id) ? $model->id : 0;
     <?= $form->field($model, 'substance_id')->widget(Select2::classname(), ['data' => $substance]) ?>
 
     <?= $form->field($model, 'country_id')->widget(Select2::classname(), ['data' => $country]) ?>
+
+    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+      'editorOptions' => ElFinder::ckeditorOptions('elfinder',[]),
+    ]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

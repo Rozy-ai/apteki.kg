@@ -23,6 +23,9 @@ foreach ($roles as $role) {
         <h4><?=$user->name?></h4>
         <p><?=$text?></h4>
       </div>
+      <div class="profile-button">
+        <a href="<?=Url::to(["site/logout"])?>"><img src="<?=Url::to(["/images/icons/login.svg"])?>"/></a>
+      </div>
     </div>
 
     <br/>

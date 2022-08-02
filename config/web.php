@@ -117,11 +117,9 @@ $config = [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             'site/*',
-            'gii/*',
             'page/*',
             'api/*',
             'yii2images/*',
-            'debug/*',
             'category/*',
             'product/*',
             'map/*',

@@ -2,19 +2,16 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\Users;
-use app\models\Company;
 use app\models\CompanyGroup;
-use app\models\CompanySearch;
+use app\models\CompanyGroupSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * CompanyController implements the CRUD actions for Company model.
+ * CompanyGroupController implements the CRUD actions for CompanyGroup model.
  */
-class CompanyController extends Controller
+class CompanyGroupController extends Controller
 {
     /**
      * @inheritDoc
@@ -35,13 +32,13 @@ class CompanyController extends Controller
     }
 
     /**
-     * Lists all Company models.
+     * Lists all CompanyGroup models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new CompanySearch();
+        $searchModel = new CompanyGroupSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -51,7 +48,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Displays a single Company model.
+     * Displays a single CompanyGroup model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -64,33 +61,16 @@ class CompanyController extends Controller
     }
 
     /**
-     * Creates a new Company model.
+     * Creates a new CompanyGroup model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $groups = [0 => "Без группировки"];
-        $group_query = CompanyGroup::find()->where(["active" => 1])->all();
-        foreach ($group_query as $group) {
-            $groups[$group->id] = $group->name;
-        }
-
-        $users = [0 => "Нет владельца"];
-        $user_query = Users::find()->joinWith("company")->where(["is", "company.id", null])->all();
-        foreach ($user_query as $user) {
-          $users[$user->id] = $user->name;
-        }
-
-        $model = new Company();
+        $model = new CompanyGroup();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                $model->image = UploadedFile::getInstance($model, 'image');
-                if($model->image){
-                  $model->removeImages();
-                  $model->upload();
-                }
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -99,13 +79,11 @@ class CompanyController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'users' => $users,
-            'groups' => $groups
         ]);
     }
 
     /**
-     * Updates an existing Company model.
+     * Updates an existing CompanyGroup model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -113,38 +91,19 @@ class CompanyController extends Controller
      */
     public function actionUpdate($id)
     {
-        $groups = [0 => "Без группировки"];
-        $group_query = CompanyGroup::find()->where(["active" => 1])->all();
-        foreach ($group_query as $group) {
-            $groups[$group->id] = $group->name;
-        }
-
-        $users = [0 => "Нет владельца"];
-        $user_query = Users::find()->joinWith("company")->where(["is", "company.id", null])->all();
-        foreach ($user_query as $user) {
-          $users[$user->id] = $user->name;
-        }
-
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            $model->image = UploadedFile::getInstance($model, 'image');
-            if($model->image){
-              $model->removeImages();
-              $model->upload();
-            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'users' => $users,
-            'groups' => $groups
         ]);
     }
 
     /**
-     * Deletes an existing Company model.
+     * Deletes an existing CompanyGroup model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -158,15 +117,15 @@ class CompanyController extends Controller
     }
 
     /**
-     * Finds the Company model based on its primary key value.
+     * Finds the CompanyGroup model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Company the loaded model
+     * @return CompanyGroup the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Company::findOne(['id' => $id])) !== null) {
+        if (($model = CompanyGroup::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

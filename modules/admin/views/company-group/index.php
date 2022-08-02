@@ -6,18 +6,18 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CompanySearch */
+/* @var $searchModel app\models\CompanyGroupSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Аптеки';
+$this->title = 'Группировка аптек';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="company-index">
+<div class="company-group-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить аптеку', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить группу', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,9 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'pager' => [
-            'class' => 'app\components\BootstrapLinkPager',
-        ],
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
@@ -39,22 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'name',
-            [
-                'attribute'=> 'group_id',
-                'content'=>function($data){
-                    return isset($data->group) ? $data->group->name : null;
-                }
-            ],
-            [
-                'attribute'=> 'type',
-                'content'=>function($data){
-                    return Yii::$app->params['company_types'][$data->type];
-                }
-            ],
-            'address',
-            //'lat',
-            //'lon',
-            //'site',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, $model, $key, $index, $column) {

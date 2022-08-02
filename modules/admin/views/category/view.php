@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\ActionColumn;
+use yii\helpers\Url;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Category */
@@ -38,5 +41,36 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
         ],
     ]) ?>
+
+    <? if($model->parent_id == 0) : ?>
+        <br/>
+        <h2>Подкатегории</h2>
+
+        <p>
+            <?= Html::a('Создать подкатегорию', ['create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        </p>
+
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'pager' => [
+                'class' => 'app\components\BootstrapLinkPager',
+            ],
+            'filterModel' => $searchModel,
+            'columns' => [
+                //['class' => 'yii\grid\SerialColumn'],
+
+                'id',
+                [
+                    'attribute'=> 'active',
+                    'content'=>function($data) {
+                        return $data->active ? '<i class="fas fa-check"></i>' : '<i class="fas fa-ban"></i>';
+                    }
+                ],
+                'name',
+
+                ['class' => 'yii\grid\ActionColumn'],
+            ],
+        ]); ?>
+    <? endif ?>
 
 </div>

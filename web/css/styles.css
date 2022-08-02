@@ -335,6 +335,14 @@ html { font-family: 'Inter', sans-serif; }
   color: #363636;
 }
 
+.product-availability {
+  margin: 20px 0px;
+}
+
+.product-availability h4 {
+  font-size: 1.2rem;
+}
+
 .product .count {
   font-weight: 500;
   font-size: 0.5rem;
@@ -497,14 +505,14 @@ html { font-family: 'Inter', sans-serif; }
 	margin: 57px 48px 45px 0px;
 }
 
-.top-menu li a{
+.top-menu li a {
 	color: #3D3D3D;
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
 }
 
-.top-menu li.active a {
+.top-menu li a.active {
 	color: #23B250;
   text-decoration: underline;
 }
@@ -679,6 +687,15 @@ html { font-family: 'Inter', sans-serif; }
     width: 100%;
 }
 
+.profile-button {
+   height: 100%;
+   padding: 25px 0px;
+}
+
+.profile-button img {
+  height: 50px;
+}
+
 .profile .profile-info {
   margin: 20px;
 }
@@ -824,7 +841,7 @@ html { font-family: 'Inter', sans-serif; }
   }
 
   .top-menu li {
-  	margin: 46px 0px 26px 0px;
+  	margin: 46px 5px 26px 5px;
   }
 
   .top-menu li a{

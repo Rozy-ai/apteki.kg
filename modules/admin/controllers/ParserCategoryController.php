@@ -81,10 +81,18 @@ class ParserCategoryController extends Controller
      */
     public function actionUpdate($id)
     {
-        $category = array("0" => "Нет");
-        $category_query = Category::find()->where(["active" => 1])->all();
-        foreach ($category_query as $item) {
-          $category[$item->id] = $item->name;
+        $category = array("0" => "Нет категории");
+        $category_main_query = Category::find()->where(["active" => 1, "parent_id" => 0])->all();
+        foreach ($category_main_query as $item_main) {
+            $category_query = Category::find()->where(["active" => 1, "parent_id" => $item_main->id])->all();
+            if(count($category_query) == 0) {
+                $category[$item_main->id] = $item_main->name;
+            } else {
+                $category[$item_main->name] = [];
+                foreach ($category_query as $item) {
+                    $category[$item_main->name][$item->id] = $item->name;
+                }
+            }
         }
 
         $model = $this->findModel($id);

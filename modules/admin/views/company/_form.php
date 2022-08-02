@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Company */
@@ -13,6 +14,10 @@ use yii\bootstrap4\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'active')->checkbox() ?>
+
+    <?= $form->field($model, 'group_id')->widget(Select2::classname(), ['data' => $groups]) ?>
+
+    <?= $form->field($model, 'user_id')->widget(Select2::classname(), ['data' => $users]) ?>
 
   	<?
   		$img = $model->getImage();

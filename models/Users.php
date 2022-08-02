@@ -48,6 +48,11 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         ];
     }
 
+    public function getCompany()
+    {
+        return $this->hasOne(Company::className(), ['user_id' => 'id']);
+    }
+
     /**
      * {@inheritdoc}
      */

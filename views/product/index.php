@@ -11,8 +11,8 @@ $this->title = 'Apteka';
 ?>
 <div class="site-search">
     <h1 id="main"><?=$product->name?></h1>
-    <ul class="top-menu">
-      <li><a href="#main">Основное</a></li>
+    <ul id="product-menu" class="top-menu">
+      <li><a class="active" href="#main">Основное</a></li>
       <? if($product->description) : ?>
         <li><a href="#description">Описание</a></li>
       <? endif ?>

@@ -50,7 +50,7 @@ $this->title = 'Apteka';
         'class' => 'container-class owl-theme'
     ],
     'pluginOptions'    => [
-        'dots' => true,
+        'dots' => false,
         'nav' => true,
         'navText' => ["<img src='../images/icons/owl_left_arrow.svg' />", "<img src='../images/icons/owl_right_arrow.svg' />"],
         'margin' => 10,

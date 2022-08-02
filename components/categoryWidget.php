@@ -17,7 +17,7 @@ class categoryWidget extends Widget {
     public function run()
     {
 		$menu = '';
-		$menu_query = Category::find()->where(["active" => 1])->all();
+		$menu_query = Category::find()->where(["active" => 1, "parent_id" => 0])->all();
 		foreach ($menu_query as $item) {
 			$menu .= '<li><a href="' . Url::to(['category/index', 'id' => $item->id]) . '">' . $item->name . '</a></li>';
 		}

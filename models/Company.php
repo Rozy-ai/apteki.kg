@@ -43,16 +43,16 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['active', 'type', 'user_id'], 'integer'],
+            [['active', 'type', 'user_id', 'group_id'], 'integer'],
             [['name', 'type'], 'required'],
             [['lat', 'lon'], 'number'],
-						[['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['site'], 'required', 'when' => function ($model) {
-						    if($model->type == 2) {
-									return true;
-								}
-						    return false;
-					    }, 'whenClient' => "function (attribute, value) { return $('#company-type').val() == 2; }", 'message' => 'Необходимо заполнить "Сайт"'],
+                if($model->type == 2) {
+                        return true;
+                    }
+                return false;
+            }, 'whenClient' => "function (attribute, value) { return $('#company-type').val() == 2; }", 'message' => 'Необходимо заполнить "Сайт"'],
             ['site', 'url'],
             [['address'], 'required', 'when' => function ($model) {
                 if($model->type != 2) {
@@ -76,6 +76,7 @@ class Company extends \yii\db\ActiveRecord
             'id' => 'ID',
             'active' => 'Активность',
             'user_id' => 'Владелец',
+            'group_id' => 'Группа',
             'name' => 'Название',
             'type' => 'Тип',
             'address' => 'Адрес',
@@ -87,6 +88,11 @@ class Company extends \yii\db\ActiveRecord
             'contact' => 'Контакты',
             'work' => 'Режим работы'
         ];
+    }
+
+    public function getGroup()
+    {
+        return $this->hasOne(CompanyGroup::className(), ['id' => 'group_id']);
     }
 
   	public function upload(){

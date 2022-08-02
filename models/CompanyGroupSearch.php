@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Category;
+use app\models\CompanyGroup;
 
 /**
- * CategorySearch represents the model behind the search form of `app\models\Category`.
+ * CompanyGroupSearch represents the model behind the search form of `app\models\CompanyGroup`.
  */
-class CategorySearch extends Category
+class CompanyGroupSearch extends CompanyGroup
 {
     /**
      * {@inheritdoc}
@@ -38,9 +38,9 @@ class CategorySearch extends Category
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $id)
+    public function search($params)
     {
-        $query = Category::find()->where(["parent_id" => $id]);
+        $query = CompanyGroup::find();
 
         // add conditions that should always apply here
 

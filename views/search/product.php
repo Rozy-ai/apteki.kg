@@ -12,10 +12,10 @@ $this->title = 'Apteka';
       <li class="active"><a href="<?=Url::to(['index']);?>">По алфавиту</a></li>
   </ul>
 
-  <form id="search-form" method="get" action="<?=Url::to(['search/index']);?>">
+  <form id="search-form-page" method="get" action="<?=Url::to(['search/index']);?>">
     <div style="margin:0px;" class="block-search">
         <input class="form-search" type="text" name="q" placeholder="Поиск лекарств" aria-label="Поиск лекарств">
-        <button type="submit" form="search-form" class="btn">Найти</button>
+        <button type="submit" form="search-form-page" class="btn">Найти</button>
     </div>
   </form>
 

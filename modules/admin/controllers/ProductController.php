@@ -105,9 +105,17 @@ class ProductController extends Controller
     public function actionCreate()
     {
         $category = array();
-        $category_query = Category::find()->where(["active" => 1])->all();
-        foreach ($category_query as $item) {
-          $category[$item->id] = $item->name;
+        $category_main_query = Category::find()->where(["active" => 1, "parent_id" => 0])->all();
+        foreach ($category_main_query as $item_main) {
+            $category_query = Category::find()->where(["active" => 1, "parent_id" => $item_main->id])->all();
+            if(count($category_query) == 0) {
+                $category[$item_main->id] = $item_main->name;
+            } else {
+                $category[$item_main->name] = [];
+                foreach ($category_query as $item) {
+                    $category[$item_main->name][$item->id] = $item->name;
+                }
+            }
         }
 
         $substance = array();
@@ -189,9 +197,17 @@ class ProductController extends Controller
         }
 
         $category = array();
-        $category_query = Category::find()->where(["active" => 1])->all();
-        foreach ($category_query as $item) {
-          $category[$item->id] = $item->name;
+        $category_main_query = Category::find()->where(["active" => 1, "parent_id" => 0])->all();
+        foreach ($category_main_query as $item_main) {
+            $category_query = Category::find()->where(["active" => 1, "parent_id" => $item_main->id])->all();
+            if(count($category_query) == 0) {
+                $category[$item_main->id] = $item_main->name;
+            } else {
+                $category[$item_main->name] = [];
+                foreach ($category_query as $item) {
+                    $category[$item_main->name][$item->id] = $item->name;
+                }
+            }
         }
 
         $substance = array();

@@ -21,6 +21,15 @@ $(document).ready(function() {
         $(".availability-list").hide();
     });
 
+    $(document).on('click', '#product-menu a', function () {
+        if ($(this).hasClass('active')) {
+          return
+        }
+        $("#product-menu .active").removeClass('active');
+        $(this).addClass('active')
+    });
+
+
     $(document).on('click', '#favorite', function () {
         let elem = $(this);
         let id = elem.attr("data-article");

@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 use app\models\Product;
 
 class SearchController extends Controller
@@ -30,12 +31,18 @@ class SearchController extends Controller
       }
 
 
-      $products = Product::find()->where($where)->orderBy("product.name")->all();
+      $query = Product::find()->where($where)->andWhere(["<>", "availability_count", 0])->orderBy("product.name");
+      $countQuery = clone $query;
+      $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 50]);
+      $products = $query->offset($pages->offset)
+          ->limit($pages->limit)
+          ->all();
 
       return $this->render('index', [
         'q' => $q,
         'type' => $type,
         'products' => $products,
+        'pages' => $pages,
       ]);
     }
 
@@ -44,7 +51,7 @@ class SearchController extends Controller
       $product = Product::findOne($id);
 
       return $this->render('product', [
-        'product' => $product,
+        'product' => $product
       ]);
     }
 }

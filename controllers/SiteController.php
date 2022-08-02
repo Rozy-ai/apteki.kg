@@ -37,16 +37,28 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $user_id = Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->id;
-        $products = Product::find()->joinWith(["availability", "favorite" => function ($query) use ($user_id)  {
+        $products = Product::find()->joinWith(["favorite" => function ($query) use ($user_id)  {
   				$query->onCondition(['product_favorite.user_id' => $user_id]);
-  			}])->where(["active" => 1])->andWhere(["is not", "product_availability.id", null])->orderBy("product.id DESC")->limit(8)->all();
+  			}])->where(["active" => 1])->andWhere(["<>", "availability_count", 0])->orderBy("product.id DESC")->limit(8)->all();
 
         return $this->render('index', [
           'products' => $products,
           'banners' => Banner::find()->where(["active" => 1])->all()
         ]);
     }
-    
+
+    /*public function actionTest()
+    {
+        $products = Product::find()->joinWith(["availability"])->all();
+        foreach ($products as $product) {
+            $product->availability_count = count($product->availability);
+            $product->save();
+        }
+
+        return $this->goHome();
+    }*/
+
+
     /**
      * Login action.
      *

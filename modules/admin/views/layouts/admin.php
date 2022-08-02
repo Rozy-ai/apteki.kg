@@ -30,7 +30,7 @@ AdminAsset::register($this);
     <?
       $menu_array = [];
       foreach (Yii::$app->params['menu_types'] as $id => $name) {
-        array_push($menu_array, ['visible' => !Yii::$app->user->isGuest, 'label' => $name, 'url' => ['/admin/menu/index', "type" => $id]]);
+        array_push($menu_array, ['visible' => Yii::$app->user->can('adminPermission'), 'label' => $name, 'url' => ['/admin/menu/index', "type" => $id]]);
       }
     ?>
     <?php
@@ -47,55 +47,56 @@ AdminAsset::register($this);
         'encodeLabels' => false,
         'items' => [
             [
-                'visible' => !Yii::$app->user->isGuest,
+                'visible' => Yii::$app->user->can('adminPermission'),
                 'label' => 'Сайт',
                 'items' => [
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Страницы', 'url' => ['/admin/pages/index']],
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Баннеры', 'url' => ['/admin/banner/index']],
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Обращения', 'url' => ['/admin/feedback/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Страницы', 'url' => ['/admin/pages/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Баннеры', 'url' => ['/admin/banner/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Обращения', 'url' => ['/admin/feedback/index']],
                ],
             ],
             [
-                'visible' => !Yii::$app->user->isGuest,
+                'visible' => Yii::$app->user->can('adminPermission'),
                 'label' => 'Каталог',
                 'items' => [
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Категории', 'url' => ['/admin/category/index']],
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Товары', 'url' => ['/admin/product/index']],
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Аптеки', 'url' => ['/admin/company/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Категории', 'url' => ['/admin/category/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Товары', 'url' => ['/admin/product/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Группировка аптек', 'url' => ['/admin/company-group/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Аптеки', 'url' => ['/admin/company/index']],
                ],
             ],
             [
-                'visible' => !Yii::$app->user->isGuest,
+                'visible' => Yii::$app->user->can('adminPermission'),
                 'label' => 'Парсер',
                 'items' => [
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Категории', 'url' => ['/admin/parser-category/index']],
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Товары', 'url' => ['/admin/parser-product/index']],
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Логи', 'url' => ['/admin/logs/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Категории', 'url' => ['/admin/parser-category/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Товары', 'url' => ['/admin/parser-product/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Логи', 'url' => ['/admin/logs/index']],
                ],
             ],
             [
-                'visible' => !Yii::$app->user->isGuest,
+                'visible' => Yii::$app->user->can('adminPermission'),
                 'label' => 'Справочники',
                 'items' => [
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Действующее вещество', 'url' => ['/admin/substance/index']],
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Производитель', 'url' => ['/admin/producer/index']],
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => 'Страна', 'url' => ['/admin/country/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Действующее вещество', 'url' => ['/admin/substance/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Производитель', 'url' => ['/admin/producer/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => 'Страна', 'url' => ['/admin/country/index']],
                ],
             ],
             [
-                'visible' => !Yii::$app->user->isGuest,
+                'visible' => Yii::$app->user->can('adminPermission'),
                 'label' => 'Пользователи',
                 'items' => [
                     '<div  class="dropdown-header">Пользователи</div >',
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => '<span class="glyphicon glyphicon-user"></span> Клиенты', 'url' => ['/admin/users/index']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => '<span class="glyphicon glyphicon-user"></span> Клиенты', 'url' => ['/admin/users/index']],
                     '<div  class="dropdown-header">Управление доступом</div >',
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => '<span class="glyphicon glyphicon-lock"></span> Маршруты', 'url' => ['/rbac/route']],
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => '<span class="glyphicon glyphicon-lock"></span> Доступы', 'url' => ['/rbac/permission']],
-                    ['visible' => !Yii::$app->user->isGuest, 'label' => '<span class="glyphicon glyphicon-lock"></span> Роли', 'url' => ['/rbac/role']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => '<span class="glyphicon glyphicon-lock"></span> Маршруты', 'url' => ['/rbac/route']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => '<span class="glyphicon glyphicon-lock"></span> Доступы', 'url' => ['/rbac/permission']],
+                    ['visible' => Yii::$app->user->can('adminPermission'), 'label' => '<span class="glyphicon glyphicon-lock"></span> Роли', 'url' => ['/rbac/role']],
                 ],
             ],
             [
-                'visible' => !Yii::$app->user->isGuest,
+                'visible' => Yii::$app->user->can('adminPermission'),
                 'label' => 'Меню',
                 'items' => $menu_array,
             ]
