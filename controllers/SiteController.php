@@ -46,19 +46,7 @@ class SiteController extends Controller
           'banners' => Banner::find()->where(["active" => 1])->all()
         ]);
     }
-
-    /*public function actionTest()
-    {
-        $products = Product::find()->joinWith(["availability"])->all();
-        foreach ($products as $product) {
-            $product->availability_count = count($product->availability);
-            $product->save();
-        }
-
-        return $this->goHome();
-    }*/
-
-
+    
     /**
      * Login action.
      *

@@ -33,6 +33,11 @@ class CompanyGroup extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getCompany()
+    {
+        return $this->hasMany(Company::className(), ['group_id' => 'id']);
+    }
+
     /**
      * {@inheritdoc}
      */

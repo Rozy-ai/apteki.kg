@@ -75,6 +75,11 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(ProductAnalog::className(), ['analog_id' => 'id']);
     }
 
+    public function getGroupAvailability()
+    {
+        return $this->hasMany(GroupAvailability::className(), ['product_id' => 'id']);
+    }
+
     public function getAvailability()
     {
         return $this->hasMany(ProductAvailability::className(), ['product_id' => 'id']);

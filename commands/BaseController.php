@@ -5,11 +5,22 @@ namespace app\commands;
 use Yii;
 use yii\console\Controller;
 use app\models\Logs;
+use app\models\Product;
 use app\models\ParserSettings;
 
 
 class BaseController extends Controller
 {
+
+    public function actionUpdater()
+    {
+        $products = Product::find()->joinWith(["availability", "groupAvailability"])->all();
+        foreach ($products as $product) {
+            $product->availability_count = count($product->availability) + count($product->groupAvailability);
+            $product->save();
+        }
+    }
+
     protected function getSettings($type)
     {
       return ParserSettings::findOne($type);

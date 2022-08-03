@@ -212,14 +212,18 @@ class AloeController extends BaseController
 
             $imagesElem = $htmlDoc->find("#list_product_image_middle a");
             foreach ($imagesElem as $image) {
-              $url = $image->getAttribute("href");
-              $array = explode(".", $url);
-              $expansion = $array[count($array) - 1];
-              $path = "./web/uploads/" . time() . $expansion;
-              file_put_contents($path , fopen($url, 'r'));
-              $item->attachImage($path);
-              unlink($path);
-              sleep(1);
+                $url = $image->getAttribute("href");
+                $array = explode(".", $url);
+                $expansion = $array[count($array) - 1];
+                $path = "./web/uploads/" . time() . $expansion;
+                try {
+                    file_put_contents($path , fopen($url, 'r'));
+                    $item->attachImage($path);
+                    unlink($path);
+                } catch (\Exception $e) {
+                    $this->consoleLog($parser_type, $e->getMessage());
+                }
+                sleep(1);
             }
 
             $availability = new ProductAvailability(["product_id" => $item->id, "company_id" => $company_id, "price" => $item->price, "count" => 0, "url" => $product->url]);

@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <br/>
-    <h1>Наличие товара</h1>
+    <h1>Наличие товара по компаниям</h1>
     <p>
         <?= Html::a('Занести наличие', ['product-availability/create', 'product_id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
@@ -106,6 +106,38 @@ $this->params['breadcrumbs'][] = $this->title;
                 'urlCreator' => function ($action, $model, $key, $index, $column) {
                     return Url::toRoute(['product-availability/' . $action, 'id' => $model->id]);
                  }
+            ],
+        ],
+    ]); ?>
+
+    <br/>
+    <h1>Наличие товара по группам</h1>
+    <p>
+        <?= Html::a('Занести наличие', ['group-availability/create', 'product_id' => $model->id], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProviderGroupAvailability,
+        'pager' => [
+            'class' => 'app\components\BootstrapLinkPager',
+        ],
+        'columns' => [
+            //['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            [
+                'attribute'=> 'group_id',
+                'content'=>function($data) {
+                    return isset($data->group) ? Html::a($data->group->name, ['company-group/view', 'id' => $data->group->id]) : null;
+                }
+            ],
+            'price',
+            'count',
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, $model, $key, $index, $column) {
+                    return Url::toRoute(['group-availability/' . $action, 'id' => $model->id]);
+                }
             ],
         ],
     ]); ?>

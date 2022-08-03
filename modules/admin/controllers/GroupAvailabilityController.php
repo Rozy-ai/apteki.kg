@@ -2,17 +2,17 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\Company;
-use app\models\ProductAvailability;
+use app\models\GroupAvailability;
+use app\models\CompanyGroup;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProductAvailabilityController implements the CRUD actions for ProductAvailability model.
+ * GroupAvailabilityController implements the CRUD actions for GroupAvailability model.
  */
-class ProductAvailabilityController extends Controller
+class GroupAvailabilityController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,7 +33,7 @@ class ProductAvailabilityController extends Controller
     }
 
     /**
-     * Displays a single ProductAvailability model.
+     * Displays a single GroupAvailability model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -46,18 +46,18 @@ class ProductAvailabilityController extends Controller
     }
 
     /**
-     * Creates a new ProductAvailability model.
+     * Creates a new GroupAvailability model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate($product_id)
     {
-        $model = new ProductAvailability(["product_id" => $product_id]);
+        $model = new GroupAvailability(["product_id" => $product_id]);
 
-        $companys = array();
-        $companys_query = Company::find()->where(["active" => 1])->all();
-        foreach ($companys_query as $item) {
-            $companys[$item->id] = $item->name;
+        $groups = array();
+        $groups_query = CompanyGroup::find()->where(["active" => 1])->all();
+        foreach ($groups_query as $item) {
+            $groups[$item->id] = $item->name;
         }
 
         if ($this->request->isPost) {
@@ -70,12 +70,12 @@ class ProductAvailabilityController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'companys' => $companys
+            'groups' => $groups
         ]);
     }
 
     /**
-     * Updates an existing ProductAvailability model.
+     * Updates an existing GroupAvailability model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -85,10 +85,10 @@ class ProductAvailabilityController extends Controller
     {
         $model = $this->findModel($id);
 
-        $companys = array();
-        $companys_query = Company::find()->where(["active" => 1])->all();
-        foreach ($companys_query as $item) {
-          $companys[$item->id] = $item->name;
+        $groups = array();
+        $groups_query = CompanyGroup::find()->where(["active" => 1])->all();
+        foreach ($groups_query as $item) {
+            $groups[$item->id] = $item->name;
         }
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -97,12 +97,12 @@ class ProductAvailabilityController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'companys' => $companys
+            'groups' => $groups
         ]);
     }
 
     /**
-     * Deletes an existing ProductAvailability model.
+     * Deletes an existing GroupAvailability model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class ProductAvailabilityController extends Controller
     }
 
     /**
-     * Finds the ProductAvailability model based on its primary key value.
+     * Finds the GroupAvailability model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return ProductAvailability the loaded model
+     * @return GroupAvailability the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ProductAvailability::findOne(['id' => $id])) !== null) {
+        if (($model = GroupAvailability::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

@@ -12,6 +12,7 @@ use app\models\Producer;
 use app\models\Product;
 use app\models\ProductAnalog;
 use app\models\ProductAvailability;
+use app\models\GroupAvailability;
 use app\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -90,10 +91,23 @@ class ProductController extends Controller
             ],
         ]);
 
+        $dataProviderGroupAvailability = new ActiveDataProvider([
+            'query' => GroupAvailability::find()->where(["product_id" => $model->id]),
+            'pagination' => [
+                'pageSize' => 20
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+        ]);
+
         return $this->render('view', [
             'model' => $model,
             'dataProviderAnalog' => $dataProviderAnalog,
-            'dataProviderAvailability' => $dataProviderAvailability
+            'dataProviderAvailability' => $dataProviderAvailability,
+            'dataProviderGroupAvailability' => $dataProviderGroupAvailability
         ]);
     }
 

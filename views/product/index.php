@@ -76,6 +76,21 @@ $this->title = 'Apteka';
                   searchControlProvider: 'yandex#search'
               });
 
+              <? foreach ($product->groupAvailability as $groupAvailability) : ?>
+                <? if($groupAvailability->group) : ?>
+                    <? foreach ($groupAvailability->group->company as $item) : ?>
+                        <? if($item->type != 2) : ?>
+                          myMap.geoObjects.add(new ymaps.Placemark([<?=$item->lat?>, <?=$item->lon?>], {
+                              iconCaption: '<?=$groupAvailability->price?> c.',
+                              balloonContentHeader: '<?=$item->name?>',
+                              balloonContentBody: '<?=$groupAvailability->price?> c.<br/><?=$item->address?>',
+                          }, {
+                              preset: 'islands#darkGreenIcon'
+                          }));
+                        <? endif ?>
+                    <? endforeach ?>
+                <? endif ?>
+              <? endforeach ?>
               <? foreach ($product->availability as $item) : ?>
                 <? if($item->company->type != 2) : ?>
                   myMap.geoObjects.add(new ymaps.Placemark([<?=$item->company->lat?>, <?=$item->company->lon?>], {
@@ -106,25 +121,48 @@ $this->title = 'Apteka';
       <div id="availability-map"></div>
 
     <div class="availability-list">
-      <? foreach ($product->availability as $item) : ?>
-        <div class="availability-item row">
-          <div class="col-6 col-sm-6">
-            <h4><?=$item->company->name?> <span><?=$item->company->rating?></span></h4>
-            <div class="work"><?=$item->company->work?></div>
-          </div>
-          <div class="col-6 col-sm-4">
-              <div class="price">От <span><?=$item->price?> c.</span></div>
-              <div class="description">Есть в наличии</div>
-          </div>
-          <div class="col-6 col-sm-2">
-            <? if($item->company->type == 2) : ?>
-             <a href="<?=$item->url?>" class="btn">Купить</a>
-           <? else : ?>
-            <button onClick="viewMap(<?=$item->company->lat?>, <?=$item->company->lon?>)" class="btn">Показать на карте</button>
-          <? endif ?>
-          </div>
-        </div>
-      <? endforeach ?>
+        <? foreach ($product->groupAvailability as $groupAvailability) : ?>
+            <? if($groupAvailability->group) : ?>
+                <? foreach ($groupAvailability->group->company as $item) : ?>
+                    <div class="availability-item row">
+                        <div class="col-6 col-sm-6">
+                            <h4><?=$item->name?> <span><?=$item->rating?></span></h4>
+                            <div class="work"><?=$item->work?></div>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <div class="price">От <span><?=$groupAvailability->price?> c.</span></div>
+                            <div class="description">Есть в наличии</div>
+                        </div>
+                        <div class="col-6 col-sm-2">
+                            <? if($item->type == 2) : ?>
+                                <a href="<?=$groupAvailability->url?>" class="btn">Купить</a>
+                            <? else : ?>
+                                <button onClick="viewMap(<?=$item->lat?>, <?=$item->lon?>)" class="btn">Показать на карте</button>
+                            <? endif ?>
+                        </div>
+                    </div>
+                <? endforeach ?>
+            <? endif ?>
+        <? endforeach ?>
+        <? foreach ($product->availability as $item) : ?>
+            <div class="availability-item row">
+              <div class="col-6 col-sm-6">
+                <h4><?=$item->company->name?> <span><?=$item->company->rating?></span></h4>
+                <div class="work"><?=$item->company->work?></div>
+              </div>
+              <div class="col-6 col-sm-4">
+                  <div class="price">От <span><?=$item->price?> c.</span></div>
+                  <div class="description">Есть в наличии</div>
+              </div>
+              <div class="col-6 col-sm-2">
+                <? if($item->company->type == 2) : ?>
+                 <a href="<?=$item->url?>" class="btn">Купить</a>
+               <? else : ?>
+                <button onClick="viewMap(<?=$item->company->lat?>, <?=$item->company->lon?>)" class="btn">Показать на карте</button>
+              <? endif ?>
+              </div>
+            </div>
+        <? endforeach ?>
     </div>
 
     <? if($product->description) : ?>

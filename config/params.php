@@ -3,7 +3,7 @@
 return [
     'bsVersion' => '4.x',
     'ymap_api_key' => '2b9adc0b-4e63-4faf-9690-1b7e915e812d',
-    'supportEmail' => 'supportEmail@apteki.kg',
+    'supportEmail' => 'support@apteki.kg',
     'senderEmail' => 'noreply@apteki.kg',
     'senderName' => 'Apteki.kg',
     "menu_types" => [
@@ -21,6 +21,7 @@ return [
     "parser_types" => [
         "1" => "Atleticshop.kg",
         "2" => "Aloe.kg",
+        "3" => "Neman.kg",
     ],
     "parser_category_status" => [
         "0" => "Не обработан",
