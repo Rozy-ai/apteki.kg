@@ -48,10 +48,49 @@ class SearchController extends Controller
 
     public function actionProduct($id)
     {
-      $product = Product::findOne($id);
+        $product = Product::findOne($id);
+
+        $availability = [];
+        foreach ($product->groupAvailability as $groupItem) {
+            foreach ($groupItem->group->company as $item) {
+                $availability[] = [
+                    "name" => $item->name,
+                    "image" => $item->getImage() ? $item->getImage()->getUrl("75x75") : null,
+                    "type" => $item->type,
+                    "rating" => $item->rating,
+                    "work" => $item->work,
+                    "lat" => $item->lat,
+                    "lon" => $item->lon,
+                    "address" => $item->address,
+                    "contact" => $item->contact,
+                    "price" => $groupItem->price,
+                    "url" => $groupItem->url
+                ];
+            }
+        }
+
+        foreach ($product->availability as $item) {
+            $availability[] = [
+                "name" => $item->company->name,
+                "image" => $item->company->getImage() ? $item->company->getImage()->getUrl("75x75") : null,
+                "type" => $item->company->type,
+                "rating" => $item->company->rating,
+                "work" => $item->company->work,
+                "lat" => $item->company->lat,
+                "lon" => $item->company->lon,
+                "address" => $item->company->address,
+                "price" => $item->price,
+                "contact" => $item->company->contact,
+                "url" => $item->url
+            ];
+        }
+
+        $price = array_column($availability, 'price');
+        array_multisort($price, SORT_ASC, $availability);
 
       return $this->render('product', [
-        'product' => $product
+        'product' => $product,
+        'availability' => $availability
       ]);
     }
 }

@@ -71,6 +71,10 @@ html { font-family: 'Inter', sans-serif; }
   margin-left: 38px;
 }
 
+.product .d-flex {
+  align-items: center;
+}
+
 .btn-login {
   height: 45px;
   margin: 4px 30px 4px 60px;
@@ -256,6 +260,15 @@ html { font-family: 'Inter', sans-serif; }
   color: #fff;
 }
 
+.availability-list.show .availability-item {
+  display: flex!important;
+}
+
+.availability-item:nth-child(n+11) {
+  display: none;
+}
+
+
 .availability-item {
   margin: 40px 0;
 }
@@ -345,8 +358,8 @@ html { font-family: 'Inter', sans-serif; }
 
 .product .count {
   font-weight: 500;
+  margin-left: 5px;
   font-size: 0.5rem;
-  margin: 11px 5px;
   color: #9C9C9C;
 }
 

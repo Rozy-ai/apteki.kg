@@ -27,7 +27,7 @@ $this->title = 'Apteka';
             <span class="number">Артикул: <?=$product->number?></span>
             <div class="d-flex">
               <div class="price">От <?=$product->price?> c.</div>
-              <div class="count"><?=count($product->availability)?> пред.</div>
+              <div class="count"><?=$product->availability_count?> пред.</div>
             </div>
           </a>
           <a href="<?=Url::to(['product/index', 'id' => $product->id]);?>" class="btn">Цена на карте</a>

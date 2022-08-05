@@ -13,12 +13,17 @@ $(document).ready(function() {
 
     $(document).on('click', '#button-map', function () {
         if ($(this).hasClass('active')) {
-          return
+            return
         }
         $(this).addClass('active')
         $("#button-list").removeClass('active');
         $("#availability-map").show();
         $(".availability-list").hide();
+    });
+
+    $(document).on('click', '#showAvailability', function () {
+        $(this).hide();
+        $(".availability-list").addClass('show')
     });
 
     $(document).on('click', '#product-menu a', function () {
