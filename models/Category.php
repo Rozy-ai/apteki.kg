@@ -13,6 +13,16 @@ use Yii;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    public $image;
+
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'app\modules\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -28,6 +38,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['active'], 'integer'],
+            [['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -41,7 +52,15 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'active' => 'Активность',
+            'image' => 'Подложка',
             'name' => 'Название',
         ];
+    }
+
+    public function upload(){
+        $path = 'uploads/' . $this->image->baseName . '.' . $this->image->extension;
+        $this->image->saveAs($path);
+        $this->attachImage($path);
+        @unlink($path);
     }
 }

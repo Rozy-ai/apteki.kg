@@ -31,20 +31,16 @@ foreach ($banners as $banner) {
       <? endif ?>
 
       <br/><br/>
-      <h2>Популярное</h2>
-      <div class="category-block row">
-        <div class="col-6 col-sm-3">
-          <img src="<?=Url::to('../images/category/1.png');?>">
+      <div class="category_items row">
+        <? foreach ($category as $category_item) : ?>
+        <div class="col-lg-5th col-md-4 col-6">
+            <a onClick="openSubMenu(<?=$category_item->id?>)" href="#">
+                <div class="category_item" style="background-image: url(<?=$category_item->getImage()->getUrl("x142") ?>)">
+                    <h4><?=$category_item->name?></h4>
+                </div>
+            </a>
         </div>
-        <div class="col-6 col-sm-3">
-          <img src="<?=Url::to('../images/category/2.png');?>">
-        </div>
-        <div class="col-6 col-sm-3">
-          <img src="<?=Url::to('../images/category/3.png');?>">
-        </div>
-        <div class="col-6 col-sm-3">
-          <img src="<?=Url::to('../images/category/4.png');?>">
-        </div>
+        <? endforeach ?>
       </div>
 
       <br/><br/>

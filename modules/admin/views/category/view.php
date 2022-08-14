@@ -29,6 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <?php
+    $images = $model->getImages();
+    $img_html = '';
+    foreach ($images as $image) {
+        $img_html .= '<img src="' . $image->getUrl("x50") . '"/> ';
+    }
+    ?>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -37,6 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=> 'active',
                 'value' =>  $model->active ? '<i class="fas fa-check"></i>' : '<i class="fas fa-ban"></i>',
                 'format' => 'html'
+            ],
+            [
+                'attribute' => 'Подложка',
+                'value' => isset($images) ? $img_html  : "Не указано",
+                'format' => 'html',
             ],
             'name',
         ],

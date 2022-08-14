@@ -9,6 +9,7 @@ use app\widgets\Alert;
 use yii\bootstrap4\Breadcrumbs;
 use yii\helpers\Url;
 use yii\bootstrap4\Html;
+use yii\bootstrap4\Modal;
 
 AppAsset::register($this);
 ?>
@@ -29,19 +30,17 @@ AppAsset::register($this);
 
 <header>
   <nav class="navbar">
-    <div class="navbar-mini">
+    <div class="navbar-mobile f-none">
+        <a href="<?=Url::home()?>">
+            <img src="<?=Url::to(['../images/logo-mini.png']);?>">
+        </a>
+        <a class="logout" href="<?=Yii::$app->user->isGuest ? Url::to(['site/login']) : Url::to(['profile/index']) ?>">
+            <img src="<?=Url::to(['../images/icons/profile.svg']);?>">
+        </a>
+    </div>
+    <div class="navbar-mini m-none">
         <ul>
-          <li class="f-none">
-              <a href="<?=Url::home()?>">
-                <img src="<?=Url::to(['../images/logo-mini.png']);?>">
-              </a>
-          </li>
-          <?=app\components\menuWidget::widget(["type" => 0])?>
-            <li class="f-none">
-                <a href="<?=Yii::$app->user->isGuest ? Url::to(['site/login']) : Url::to(['profile/index']) ?>">
-                  <img src="<?=Url::to(['../images/icons/profile.svg']);?>">
-                </a>
-            </li>
+            <?=app\components\menuWidget::widget(["type" => 0])?>
       </ul>
     </div>
     <div class="container">
@@ -65,20 +64,25 @@ AppAsset::register($this);
         <? endif?>
         <a href="mailto:<?=Yii::$app->params['supportEmail']?>" class="btn btn-mail m-none">Напишите нам</a>
       </div>
-      <div class="navbar-main">
-          <ul>
-              <?=app\components\categoryWidget::widget()?>
-        </ul>
-      </div>
-    </div>
-
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="nav navbar-nav">
-          <?=app\components\categoryWidget::widget()?>
-      </ul>
-    </div>
     </div>
   </nav>
+  <div class="navbar-main">
+      <div class="container">
+        <ul>
+          <?=app\components\categoryWidget::widget()?>
+        </ul>
+      </div>
+  </div>
+
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-menu">
+              <?=app\components\menuWidget::widget(["type" => 0])?>
+
+
+          </ul>
+        </div>
+    </div>
 </header>
 
 <main role="main" class="flex-shrink-0">
@@ -133,6 +137,18 @@ AppAsset::register($this);
       </div>
     </div>
 </footer>
+
+
+<? Modal::begin([
+    //'title' => '<h2>Hello world</h2>',
+    'id' => 'sub-menu',
+    'closeButton' => false,
+]); ?>
+<button type="button" id="close-button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+<?=app\components\subcategoryWidget::widget()?>
+
+
+<? Modal::end(); ?>
 
 <?php $this->endBody() ?>
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>

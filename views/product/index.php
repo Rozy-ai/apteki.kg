@@ -124,13 +124,13 @@ $this->title = 'Apteka';
                 </div>
             </div>
         <? endforeach ?>
-    </div>
 
-    <? if(count($availability) > 9) : ?>
-        <center>
-            <button id="showAvailability" class="btn">Показать все предложения</button>
-        </center>
-    <? endif ?>
+        <? if(count($availability) > 9) : ?>
+            <center>
+                <button id="showAvailability" class="btn">Показать все предложения</button>
+            </center>
+        <? endif ?>
+    </div>
 
     <? if($product->description) : ?>
       <br/><br/>

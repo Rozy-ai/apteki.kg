@@ -214,7 +214,7 @@ class NemanController extends BaseController
                     $url = $image->getAttribute("href");
                     $array = explode(".", $url);
                     $expansion = $array[count($array) - 1];
-                    $path = "./web/uploads/" . time() . "." . $expansion;
+                    $path = "./web/uploads/neman_" . time() . "." . $expansion;
                     try {
                         file_put_contents($path , fopen($url, 'r'));
                         $item->attachImage($path);

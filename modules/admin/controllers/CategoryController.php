@@ -8,6 +8,7 @@ use app\models\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -82,6 +83,11 @@ class CategoryController extends Controller
         $model = new Category(["parent_id" => $id]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->image = UploadedFile::getInstance($model, 'image');
+            if($model->image){
+                $model->removeImages();
+                $model->upload();
+            }
             return $this->redirect(['view', 'id' => $model->parent_id == 0 ? $model->id : $model->parent_id]);
         }
 
@@ -102,6 +108,11 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->image = UploadedFile::getInstance($model, 'image');
+            if($model->image){
+                $model->removeImages();
+                $model->upload();
+            }
             return $this->redirect(['view', 'id' => $model->parent_id == 0 ? $model->id : $model->parent_id]);
         }
 

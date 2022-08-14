@@ -43,3 +43,9 @@ $(document).ready(function() {
         }, "json");
     });
 });
+
+function openSubMenu(id) {
+    $("#sub-menu").modal('show')
+    $(".sub-category.show").removeClass('show')
+    $("#sub-" + id).addClass('show');
+}

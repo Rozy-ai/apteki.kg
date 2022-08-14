@@ -38,11 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-      			[
-      				'attribute' => 'Баннеры',
-      				'value' => isset($images) ? $img_html  : "Не указано",
-      				'format' => 'html',
-      			],
+            [
+                'attribute' => 'Баннеры',
+                'value' => isset($images) ? $img_html  : "Не указано",
+                'format' => 'html',
+            ],
             [
                 'attribute'=> 'active',
                 'value' =>  $model->active ? '<i class="fas fa-check"></i>' : '<i class="fas fa-ban"></i>',

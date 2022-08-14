@@ -13,6 +13,7 @@ use app\models\Product;
 use app\models\Banner;
 use app\models\Feedback;
 use app\models\RegisterForm;
+use app\models\Category;
 
 class SiteController extends Controller
 {
@@ -37,12 +38,16 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $user_id = Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->id;
+
+        $category = Category::find()->where(["active" => 1, "parent_id" => 0])->all();
+
         $products = Product::find()->joinWith(["favorite" => function ($query) use ($user_id)  {
   				$query->onCondition(['product_favorite.user_id' => $user_id]);
   			}])->where(["active" => 1])->andWhere(["<>", "availability_count", 0])->orderBy("product.id DESC")->limit(8)->all();
 
         return $this->render('index', [
           'products' => $products,
+          'category' => $category,
           'banners' => Banner::find()->where(["active" => 1])->all()
         ]);
     }

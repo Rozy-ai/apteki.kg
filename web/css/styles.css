@@ -17,6 +17,34 @@ html { font-family: 'Inter', sans-serif; }
   padding: 0px
 }
 
+.sub-category {
+  display: none;
+  padding: 0 75px;
+}
+
+.sub-category.show {
+  display: block!important;
+}
+
+.sub-category h5 {
+  text-align: center;
+  padding: 20px;
+}
+
+.sub-category span {
+  color: #23B250;
+  font-size: 20px;
+}
+
+.col-12.col-sm-6 {
+  padding: 5px 10px;
+}
+
+.sub-category a {
+  color: #363636;
+  font-size: 14px;
+}
+
 .d-flex  .form-search {
   border: none;
   width: 100%;
@@ -103,50 +131,58 @@ html { font-family: 'Inter', sans-serif; }
 }
 
 .navbar-mini ul {
-	display: inline-flex;
+  display: inline-flex;
   list-style-type: none;
-	margin: 0;
-	padding: 0px;
+  margin: 0;
+  padding: 0px;
+}
+
+.navbar-mobile {
+  margin: 8px 0;
+}
+
+.navbar-mobile .logout {
+  position: absolute;
+  right: 25px;
 }
 
 .navbar-mini ul li {
-	margin: 57px 48px 45px 0px;
+  margin: 30px 0;
 }
 
 .navbar-mini ul li a img {
   margin-top: -5px;
 }
 
-.nav.navbar-nav li {
-  margin: 7px 0px;
+.navbar-menu {
+  list-style-position: inside;
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-count: 2;
+  margin: 15px 0;
+  padding: 0;
 }
 
-.nav.navbar-nav li a {
-  color: #23B250;
+.navbar-menu li {
+  margin-bottom: 10px;
+  list-style-type: none;
+  text-align: center;
+  background: #F7F7F7;
+  padding: 7px 0px;
+  border-radius: 5px;
 }
 
-/*.navbar-mini ul li a {
-	color: #3D3D3D;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-}*/
+.navbar-menu li a {
+  color: #363636;
+}
 
 .navbar-mini ul li a {
   background: #FFFFFF;
-  color: #23B250;
+  color: #3D3D3D;
   padding: 10px 15px;
   margin: 5px 10px;
-  box-shadow: 0px 4px 20px rgb(0 0 0 / 25%);
   border-radius: 7px;
 }
-
-/*.navbar-mini ul li a:hover,
-.navbar-mini ul li a:focus {
-  text-decoration: none;
-  color: #23B250;
-}*/
 
 .navbar-mini ul li a:hover,
 .navbar-mini ul li a:focus {
@@ -156,26 +192,33 @@ html { font-family: 'Inter', sans-serif; }
 }
 
 .navbar-main {
+    background: #F4F4F4;
+    margin-bottom: 16px;
     text-align: center;
     width: 100%;
 }
 
 .navbar-main ul {
 	display: inline-flex;
-  list-style-type: none;
+    list-style-type: none;
+    text-transform: uppercase;
 	margin: 0;
-	padding: 0px;
+	padding: 0;
 }
 
 .navbar-main ul li {
-	margin: 20px 18px 25px 0px;
+  padding: 20px 6px;
+  border-right: 1px solid #CCCCCC;
+}
+
+.navbar-main ul li:last-child {
+  border: none;
 }
 
 .navbar-main ul li a{
 	color: #3D3D3D;
   font-style: normal;
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.65rem;
 }
 
 .navbar-main ul li a:hover,
@@ -200,16 +243,31 @@ html { font-family: 'Inter', sans-serif; }
   height: 100%;
 }
 
-.category-block img {
-  width: 100%;
-  margin-bottom: 15px
-}
-
 .product {
   box-shadow: 0px 4px 20px rgba(0,0,0,0.25);
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 30px;
+}
+
+.category_item {
+  height: 142px;
+  margin-bottom: 28px;
+  border: 1px solid #E2E2E2;
+  border-radius: 7px;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+}
+
+.category_items a {
+  text-decoration: none;
+}
+
+.category_item h4 {
+  font-weight: 500;
+  font-size: 16px;
+  color: #363636;
+  margin: 17px 20px;
 }
 
 .product .star {
@@ -222,6 +280,10 @@ html { font-family: 'Inter', sans-serif; }
 .product #favorite {
   background: none;
   border: none;
+}
+
+.product img {
+  width: 100%;
 }
 
 .product .far.fa-heart {
@@ -813,6 +875,13 @@ html { font-family: 'Inter', sans-serif; }
   margin-top: 10px;
 }
 
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 800px;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar-main, .navbar-header .logo, .m-none {
     display: none;
@@ -834,10 +903,6 @@ html { font-family: 'Inter', sans-serif; }
     font-size: 10px;
   }
 
-  .navbar-mini ul li {
-  	margin: 46px 0px 26px 0px;
-  }
-
   h1 {
     font-size: 1.5rem;
   }
@@ -849,7 +914,6 @@ html { font-family: 'Inter', sans-serif; }
     padding: 5px 3px;
     margin: 2px;
     white-space: nowrap;
-    box-shadow: 0px 4px 20px rgb(0 0 0 / 25%);
     border-radius: 7px;
   }
 

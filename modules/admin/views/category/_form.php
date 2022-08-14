@@ -14,6 +14,15 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'active')->checkbox() ?>
 
+    <?
+        $img = $model->getImage();
+        if(isset($img)) {
+            echo '<img src="' . $img->getUrl("x50") . '"><br/><br/>';
+        }
+    ?>
+
+    <?= $form->field($model, 'image')->fileInput() ?>
+
     <?= $form->field($model, 'name')->textInput() ?>
 
     <div class="form-group">

@@ -39,7 +39,7 @@ class Banner extends \yii\db\ActiveRecord
         return [
             [['active'], 'integer'],
             [['url'], 'required'],
-						[['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
             ['url', 'url'],
             [['url'], 'string', 'max' => 255],
         ];
