@@ -34,9 +34,10 @@ foreach ($banners as $banner) {
       <div class="category_items row">
         <? foreach ($category as $category_item) : ?>
         <div class="col-lg-5th col-md-4 col-6">
-            <a onClick="openSubMenu(<?=$category_item->id?>)" href="#">
+            <a class="category_link" href="<?= Url::to(['category/index', 'id' => $category_item->id])?>" data-category="<?=$category_item->id?>" >
                 <div class="category_item" style="background-image: url(<?=$category_item->getImage()->getUrl("x142") ?>)">
                     <h4><?=$category_item->name?></h4>
+                    <img class="category_selected" src="<?=Url::to(['/images/icons/selected_category.svg']);?>" />
                 </div>
             </a>
         </div>

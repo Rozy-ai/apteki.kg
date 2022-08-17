@@ -2,6 +2,7 @@
 
 namespace app\commands;
 
+use Yii;
 use app\models\Product;
 use app\models\ProductAvailability;
 use app\models\Category;
@@ -225,7 +226,7 @@ class AtleticshopController extends BaseController
               $url = $image->getAttribute("href");
               $array = explode(".", $url);
               $expansion = $array[count($array) - 1];
-              $path = "./web/uploads/atleticshop_" . time() .  "." . $expansion;
+                $path = Yii::getAlias('@app') . "/web/uploads/atleticshop_" . time() . "." .  $expansion;
               try {
                 file_put_contents($path , fopen($url, 'r'));
                 $item->attachImage($path);

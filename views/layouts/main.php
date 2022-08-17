@@ -76,11 +76,9 @@ AppAsset::register($this);
 
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-menu">
-              <?=app\components\menuWidget::widget(["type" => 0])?>
-
-
-          </ul>
+          <div class="navbar-menu row">
+              <?=app\components\menuWidget::widget(["type" => 0, "style" => 1])?>
+          </div>
         </div>
     </div>
 </header>

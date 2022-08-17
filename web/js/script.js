@@ -35,6 +35,16 @@ $(document).ready(function() {
     });
 
 
+    $(document).on('click', '.category_link', function (event) {
+        let id = $(this).attr("data-category");
+        if ($("#sub-" + id).length) {
+            event.preventDefault();
+            $("#sub-menu").modal('show')
+            $(".sub-category.show").removeClass('show')
+            $("#sub-" + id).addClass('show');
+        }
+    });
+
     $(document).on('click', '#favorite', function () {
         let elem = $(this);
         let id = elem.attr("data-article");
@@ -43,9 +53,3 @@ $(document).ready(function() {
         }, "json");
     });
 });
-
-function openSubMenu(id) {
-    $("#sub-menu").modal('show')
-    $(".sub-category.show").removeClass('show')
-    $("#sub-" + id).addClass('show');
-}

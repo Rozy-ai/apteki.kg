@@ -37,7 +37,7 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['active'], 'integer'],
+            [['active', 'parent_id'], 'integer'],
             [['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],

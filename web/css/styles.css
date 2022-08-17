@@ -155,15 +155,13 @@ html { font-family: 'Inter', sans-serif; }
 }
 
 .navbar-menu {
-  list-style-position: inside;
-  -moz-column-count: 2;
-  -webkit-column-count: 2;
-  column-count: 2;
   margin: 15px 0;
   padding: 0;
 }
-
-.navbar-menu li {
+.navbar-menu .col-6 {
+  padding: 0px 5px;
+}
+.navbar-menu .navbar-menu-item {
   margin-bottom: 10px;
   list-style-type: none;
   text-align: center;
@@ -172,7 +170,7 @@ html { font-family: 'Inter', sans-serif; }
   border-radius: 5px;
 }
 
-.navbar-menu li a {
+.navbar-menu .navbar-menu-item a {
   color: #363636;
 }
 
@@ -257,6 +255,17 @@ html { font-family: 'Inter', sans-serif; }
   border-radius: 7px;
   background-position: bottom right;
   background-repeat: no-repeat;
+}
+
+.category_item:hover .category_selected {
+  display: block;
+}
+
+.category_item .category_selected {
+  position: absolute;
+  bottom: 40px;
+  left: 30px;
+  display: none;
 }
 
 .category_items a {
