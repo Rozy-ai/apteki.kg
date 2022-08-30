@@ -7,7 +7,7 @@ use yii\helpers\Url;
 $images = $product->getImages();
 $image = array_shift($images);
 
-$this->title = 'Apteka';
+$this->title = 'Apteki.kg - легкий поиск лекарств в твоем городе';
 ?>
 <div class="site-search">
     <h1 id="main"><?=$product->name?></h1>

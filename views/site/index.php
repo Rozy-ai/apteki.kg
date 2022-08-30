@@ -5,7 +5,7 @@ use yii\bootstrap4\Carousel;
 
 /** @var yii\web\View $this */
 
-$this->title = 'Apteka';
+$this->title = 'Apteki.kg - легкий поиск лекарств в твоем городе';
 
 $carousel = [];
 

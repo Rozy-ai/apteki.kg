@@ -4,7 +4,7 @@ use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 
-$this->title = 'Apteka';
+$this->title = 'Apteki.kg - легкий поиск лекарств в твоем городе';
 ?>
 <div class="site-index">
   <br/><br/>

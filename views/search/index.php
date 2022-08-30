@@ -4,7 +4,7 @@ use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 
-$this->title = 'Apteka';
+$this->title = 'Apteki.kg - легкий поиск лекарств в твоем городе';
 ?>
 <div class="search-index">
 
@@ -13,7 +13,7 @@ $this->title = 'Apteka';
   </ul>
 
   <form id="search-form-page" method="get" action="<?=Url::to(['search/index']);?>">
-    <div style="margin:0px;" class="block-search">
+    <div style="margin:0px;" class="block-search type-search-default">
         <input class="form-search" type="text" name="q" placeholder="Поиск лекарств" value='<?=$q?>' aria-label="Поиск лекарств">
         <button type="submit" form="search-form-page" class="btn">Найти</button>
     </div>

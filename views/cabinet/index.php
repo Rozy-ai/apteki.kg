@@ -6,7 +6,7 @@ use yii\bootstrap4\ActiveForm;
 
 /** @var yii\web\View $this */
 
-$this->title = 'Apteka';
+$this->title = 'Apteki.kg - легкий поиск лекарств в твоем городе';
 
 
 $roles = Yii::$app->authManager->getRolesByUser($user->id);

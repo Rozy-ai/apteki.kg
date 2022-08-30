@@ -4,7 +4,7 @@
 use kv4nt\owlcarousel\OwlCarouselWidget;
 use yii\helpers\Url;
 
-$this->title = 'Apteka';
+$this->title = 'Apteki.kg - легкий поиск аптек в твоем городе';
 ?>
 
 <script>

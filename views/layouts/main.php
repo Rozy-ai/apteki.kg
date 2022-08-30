@@ -24,6 +24,23 @@ AppAsset::register($this);
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<?=Yii::$app->params['ymap_api_key']?>" type="text/javascript"></script>
     <?php $this->head() ?>
+    <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   var z = null;m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(90014332, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/90014332" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
@@ -52,10 +69,11 @@ AppAsset::register($this);
           <img src="<?=Url::to(['../images/icons/menu.svg']);?>">
         </button>
         <form id="search-form" method="get" action="<?=Url::to(['search/index']);?>">
-          <div class="block-search">
+          <div class="block-search type-search-default">
               <input class="form-search" type="text" name="q" placeholder="Поиск лекарств" aria-label="Поиск лекарств">
               <button type="submit" form="search-form" class="btn">Найти</button>
           </div>
+            <div class="search-suggest">123<br/>456</div>
         </form>
         <? if(Yii::$app->user->isGuest) : ?>
           <a href="<?=Url::to(['site/login']);?>" class="btn btn-login m-none">Войти</a>
@@ -108,7 +126,7 @@ AppAsset::register($this);
               </div>
 
             <p>Установите удобные приложения для поиска лекарств в Apple App Store и Google Play.</p>
-            <p class="m-none">© 2006—2022 Единая справочная Аптеки в России.<br/>Все права защищены и охраняются законом.</p>
+            <p class="m-none">© 2020 Единая справочная Аптек в Киргизии.<br/>Все права защищены.</p>
         </div>
         <div class="col-6 order-4 order-sm-2 col-sm-4">
             <h4 class="m-none">О сервисе</h4>
@@ -138,7 +156,6 @@ AppAsset::register($this);
 
 
 <? Modal::begin([
-    //'title' => '<h2>Hello world</h2>',
     'id' => 'sub-menu',
     'closeButton' => false,
 ]); ?>
